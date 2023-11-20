@@ -1,0 +1,25 @@
+name: Fetch Weibo URL
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"
+
+jobs:
+  fetch_weibo_url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install beautifulsoup4 requests
+
+      - name: Fetch Weibo URL
+        env:
+          WEIBO_URL: "https://weibo.com/u/2803301701"
+        run:          python fetch_weibo_url.py
